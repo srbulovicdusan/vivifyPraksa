@@ -16,7 +16,7 @@ class Logger
      */
     public function handle($request, Closure $next)
     {
-        error_log($request);
+        error_log($request->method()." ".$request->fullUrl());
 
         return $next($request);
     }

@@ -19,23 +19,20 @@ Route::get('/welcome/{age}', function($age){
     return "welcome ".$age;
 })->middleware('logging')->middleware('ageRestriction');
 
-Route::get('/user/{id}', function($id){
-    return "welcome".$id;
-})->name('getUser')->where('id', '[0-9]+')->middleware('logging');
+Route::get('/user/{id}', 'HomeController@getUser')->name('getUser')->where('id', '[0-9]+')->middleware('logging');
 
-Route::post('/user', function(){
-    return "welcome";
-})->name('addNewUser')->middleware('logging');
+Route::post('/user', 'HomeController@addUser')->name('addNewUser')->middleware('logging');
 
-Route::delete('/user/{id}', function($id = 'd'){
-    return "user with id=".$id." deleted";
-})->name('deleteUser')->middleware('logging');
+Route::delete('/user/{id}', 'HomeController@deleteUser')->name('deleteUser')->middleware('logging');
 
-Route::put('/user', function($user){
-    return "user with id=".$user->id." changed";
-})->name('changeUser')->middleware('logging');
+Route::put('/user', 'HomeController@changeUser')->name('changeUser')->middleware('logging');
 
 Route::patch('/user', function(){
     return "patch";
 })->middleware('logging');
 
+Route::get('blade', function(){
+    return view('example', ['first_name' => 'Dusan']);
+});
+
+Route::resource('photos', 'PhotoController');
