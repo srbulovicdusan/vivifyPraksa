@@ -13,25 +13,29 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('default');
+})->name('default')->middleware('logging');
+
+Route::get('/welcome/{age}', function($age){
+    return "welcome ".$age;
+})->middleware('logging')->middleware('ageRestriction');
 
 Route::get('/user/{id}', function($id){
     return "welcome".$id;
-})->name('getUser')->where('id', '[0-9]+');
+})->name('getUser')->where('id', '[0-9]+')->middleware('logging');
 
 Route::post('/user', function(){
     return "welcome";
-})->name('addNewUser');
+})->name('addNewUser')->middleware('logging');
 
 Route::delete('/user/{id}', function($id = 'd'){
     return "user with id=".$id." deleted";
-})->name('deleteUser');
+})->name('deleteUser')->middleware('logging');
 
 Route::put('/user', function($user){
     return "user with id=".$user->id." changed";
-})->name('changeUser');
+})->name('changeUser')->middleware('logging');
 
 Route::patch('/user', function(){
     return "patch";
-});
+})->middleware('logging');
 
