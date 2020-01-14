@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/welcome/{age}', function($age){
     return "welcome ".$age;
-})->middleware('logging')->middleware('ageRestriction');
+})->middleware('logging', 'ageRestriction');
 
 Route::get('/user/{id}', 'HomeController@getUser')->name('getUser')->where('id', '[0-9]+')->middleware('logging');
 

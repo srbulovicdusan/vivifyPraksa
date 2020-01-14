@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 
-class AgeRestriction
+class LoggerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,9 +16,7 @@ class AgeRestriction
      */
     public function handle($request, Closure $next)
     {
-        if ($request->age == null || $request->age <= 18) {
-            return redirect('/');
-        }
+        error_log($request->method()." ".$request->fullUrl());
 
         return $next($request);
     }
