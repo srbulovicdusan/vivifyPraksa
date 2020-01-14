@@ -11,6 +11,8 @@
 |
 */
 
+use Webpatser\Countries\Countries;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('default')->middleware('logging');
@@ -35,4 +37,10 @@ Route::get('blade', function(){
     return view('example', ['first_name' => 'Dusan']);
 });
 
+
+
 Route::resource('photos', 'PhotoController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

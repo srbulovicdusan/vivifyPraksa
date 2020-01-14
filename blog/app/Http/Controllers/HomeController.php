@@ -6,18 +6,23 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function getUser($id)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return "user with id = ".$id;
+        $this->middleware('auth');
     }
 
-    public function addUser($user){
-        return "user with id = ".$user->id." added.";
-    }
-    public function deleteUser($id){
-        return "user with id = ".$id." deleted.";
-    }
-    public function changeUser($user){
-        return "user with id = ".$user->id." changed.";
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }

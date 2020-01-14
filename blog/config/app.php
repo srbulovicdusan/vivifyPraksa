@@ -133,12 +133,15 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    
     'providers' => [
 
         /*
          * Laravel Framework Service Providers...
          */
+        
+            
+        Webpatser\Countries\CountriesServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -187,9 +190,11 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
+    
     'aliases' => [
-
+        'Input' => Illuminate\Support\Facades\Input::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Countires' => \Webpatser\Countries\CountriesFacade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

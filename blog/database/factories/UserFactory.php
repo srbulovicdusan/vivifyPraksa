@@ -4,6 +4,7 @@
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Webpatser\Countries\Countries;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,18 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $countries = Countries::all();
+
+    $randomCountry = $countries[rand(0, $countries->count())];
+
+    info($randomCountry);
+
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'firstname' => Str::random(10),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+        'country' => $randomCountry->name
     ];
 });
