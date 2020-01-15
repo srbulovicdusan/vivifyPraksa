@@ -117,7 +117,118 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"promise.js":[function(require,module,exports) {
+})({"classes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var _default = function _default() {
+  var Character =
+  /*#__PURE__*/
+  function () {
+    function Character(x, y) {
+      _classCallCheck(this, Character);
+
+      Character.counter++;
+      this.x = Math.round(Math.random() * 10);
+      this.y = Math.round(Math.random() * 10);
+
+      if (this.constructor === Character) {
+        throw new Error("Character cannot be instantianted");
+      }
+    } // static get count(){
+    //     return this.hasOwnProperty('counter') ? this.counter: 0;
+    // }
+
+
+    _createClass(Character, [{
+      key: "setXY",
+      value: function setXY(x, y) {
+        if (x > 10 || y > 10) {
+          throw new Error("Cordinates out of bounds");
+        } else {
+          this.x = x;
+          this.y = y;
+        }
+      }
+    }, {
+      key: "getXY",
+      value: function getXY() {
+        return [this.x, this.y];
+      }
+    }]);
+
+    return Character;
+  }(); //staticka promenljiva
+
+
+  Character.counter = 0;
+
+  var PLayerCharacter =
+  /*#__PURE__*/
+  function (_Character) {
+    _inherits(PLayerCharacter, _Character);
+
+    function PLayerCharacter() {
+      _classCallCheck(this, PLayerCharacter);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(PLayerCharacter).call(this));
+    }
+
+    return PLayerCharacter;
+  }(Character);
+
+  var NonPLayerCharacter =
+  /*#__PURE__*/
+  function (_Character2) {
+    _inherits(NonPLayerCharacter, _Character2);
+
+    function NonPLayerCharacter() {
+      _classCallCheck(this, NonPLayerCharacter);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(NonPLayerCharacter).call(this));
+    }
+
+    return NonPLayerCharacter;
+  }(Character);
+
+  var player = new PLayerCharacter();
+  console.log(player);
+  console.log(player.getXY());
+
+  try {
+    player.setXY(11, 1);
+  } catch (err) {
+    console.log(err);
+  }
+
+  var player2 = new NonPLayerCharacter();
+  console.log("Numnber of players", Character.counter);
+};
+
+exports.default = _default;
+},{}],"promise.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -358,6 +469,8 @@ exports.default = _default;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+var _classes = _interopRequireDefault(require("./classes"));
+
 var _promise = _interopRequireDefault(require("./promise"));
 
 var _es = _interopRequireDefault(require("./es6"));
@@ -372,13 +485,14 @@ var _varDeclaration = _interopRequireDefault(require("./varDeclaration"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _classes.default)();
 (0, _promise.default)();
 (0, _es.default)();
 (0, _objects.default)();
 (0, _arrays.default)();
 (0, _anonymous.default)();
 (0, _varDeclaration.default)();
-},{"./promise":"promise.js","./es6":"es6.js","./objects":"objects.js","./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./classes":"classes.js","./promise":"promise.js","./es6":"es6.js","./objects":"objects.js","./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
