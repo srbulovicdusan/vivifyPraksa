@@ -42,6 +42,9 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'logging' => [
+            \App\Http\Middleware\LoggerMiddleware::class,
+        ]
     ];
 
     /**

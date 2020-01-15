@@ -12,10 +12,7 @@ class CountryValidation implements Rule
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    
 
     /**
      * Determine if the validation rule passes.
@@ -27,12 +24,7 @@ class CountryValidation implements Rule
     public function passes($attribute, $value)
     {
         $countries = Countries::all();
-        foreach ($countries as $country) {
-            if ($country->name === $value){
-                return true;
-            }
-        }
-        return false;
+        return $countries->contains('name', $value);
     }
 
     /**

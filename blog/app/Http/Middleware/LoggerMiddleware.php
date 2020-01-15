@@ -16,7 +16,7 @@ class LoggerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        error_log($request->method()." ".$request->fullUrl());
+        info($request->method()." ".$request->fullUrl());
 
         return $next($request);
     }

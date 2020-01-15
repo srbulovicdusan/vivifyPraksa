@@ -13,34 +13,18 @@
 
 use Webpatser\Countries\Countries;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('default')->middleware('logging');
-
-Route::get('/welcome/{age}', function($age){
-    return "welcome ".$age;
-})->middleware('logging', 'ageRestriction');
-
-Route::get('/user/{id}', 'HomeController@getUser')->name('getUser')->where('id', '[0-9]+')->middleware('logging');
-
-Route::post('/user', 'HomeController@addUser')->name('addNewUser')->middleware('logging');
-
-Route::delete('/user/{id}', 'HomeController@deleteUser')->name('deleteUser')->middleware('logging');
-
-Route::put('/user', 'HomeController@changeUser')->name('changeUser')->middleware('logging');
-
-Route::patch('/user', function(){
-    return "patch";
-})->middleware('logging');
-
-Route::get('blade', function(){
-    return view('example', ['first_name' => 'Dusan']);
+Route::group(['middleware' => ['logging']], function () {
+    Route::get('/', 'HomeController@home')->name('default');
+    Route::get('/welcome/{age}', 'HomeController@welcome')->middleware('ageRestriction')->middleware('auth');
+    Route::get('/user/{id}', 'HomeController@getUser')->name('getUser')->where('id', '[0-9]+')->middleware('auth');
+    Route::post('/user', 'HomeController@addUser')->name('addNewUser')->middleware('auth');
+    Route::delete('/user/{id}', 'HomeController@deleteUser')->name('deleteUser'); 
+    Route::put('/user', 'HomeController@changeUser')->name('changeUser');   
+    Route::patch('/user', 'HomeController@patch')->name('patchExample');
+    Route::get('blade', 'HomeController@blade')->name('blade');
+    Route::resource('photos', 'PhotoController');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/error', 'ErrorController@error')->name('error');
 });
 
-
-
-Route::resource('photos', 'PhotoController');
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

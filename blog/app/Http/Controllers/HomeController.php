@@ -11,16 +11,26 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+   
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function home(){
+        return view('welcome');
+    }
+    public function welcome($age){
+        return "welcome ".$age;
+    }
+    public function patch(){
+        return "patch";
+    }
+    public function blade(){
+        return view('example', ['first_name' => 'Dusan']);
+
+    }
     public function index()
     {
         return view('home');

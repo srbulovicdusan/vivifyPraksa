@@ -13,7 +13,7 @@ class NewCountryFieldUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->string("country");
         });
     }
@@ -25,7 +25,7 @@ class NewCountryFieldUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn("country");
         });
     }
