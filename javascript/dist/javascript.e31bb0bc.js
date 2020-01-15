@@ -117,7 +117,81 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"objects.js":[function(require,module,exports) {
+})({"promise.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = function _default() {
+  var promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      return Math.random() > 0.5 ? resolve("Success") : reject("Error");
+    }, 1000);
+  });
+  promise.then(function resolve(result) {
+    console.log(result);
+  }, function reject(result) {
+    console.log(result);
+  });
+};
+
+exports.default = _default;
+},{}],"es6.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _this = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
+
+var _default = function _default() {
+  var arr = [1, 2, 3];
+  arr.push(4);
+  console.log(arr);
+
+  try {
+    arr = (_readOnlyError("arr"), 3);
+  } catch (err) {
+    console.log(err);
+  }
+
+  var Person = function Person(fname, lname) {
+    _classCallCheck(this, Person);
+
+    this.fname = fname;
+    this.lname = lname;
+  };
+
+  function person(ime, prezime) {
+    this.ime = ime;
+    this.prezime = prezime;
+  }
+
+  var a = new person("ime", "prezime");
+  console.log(a);
+  var p = new Person("ime", "prezime");
+  console.log(p);
+
+  var arrow = function arrow(ime, prezime) {
+    _this.ime = ime;
+    _this.prezime = prezime;
+  }; //undefined
+
+
+  console.log(arrow.ime);
+};
+
+exports.default = _default;
+},{}],"objects.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -284,6 +358,10 @@ exports.default = _default;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+var _promise = _interopRequireDefault(require("./promise"));
+
+var _es = _interopRequireDefault(require("./es6"));
+
 var _objects = _interopRequireDefault(require("./objects"));
 
 var _arrays = _interopRequireDefault(require("./arrays"));
@@ -294,11 +372,13 @@ var _varDeclaration = _interopRequireDefault(require("./varDeclaration"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _promise.default)();
+(0, _es.default)();
 (0, _objects.default)();
 (0, _arrays.default)();
 (0, _anonymous.default)();
 (0, _varDeclaration.default)();
-},{"./objects":"objects.js","./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./promise":"promise.js","./es6":"es6.js","./objects":"objects.js","./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
