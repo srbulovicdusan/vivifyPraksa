@@ -117,7 +117,63 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"anonymous.js":[function(require,module,exports) {
+})({"arrays.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = function _default() {
+  var colors = ['red', 'orange', 'yellow'];
+
+  for (var _i = 0, _colors = colors; _i < _colors.length; _i++) {
+    var color = _colors[_i];
+    console.log(color);
+  }
+
+  colors.forEach(function (el) {
+    console.log(el);
+  });
+
+  function rotate(steps, arr) {
+    for (var i = 0; i < steps; i++) {
+      arr = [arr[arr.length - 1]].concat(arr.splice(0, arr.length - 1));
+    }
+
+    return arr;
+  }
+
+  var reducer = function reducer(accumulator, currentValue) {
+    return accumulator + currentValue;
+  };
+
+  function makeArray(num) {
+    var arr = [];
+
+    for (var i = 0; i < num; i++) {
+      arr.push(i);
+    }
+
+    return arr;
+  }
+
+  function printArray(arr) {
+    for (var i = 0; i < arr.length; i++) {
+      console.log(arr[i][0] + " the " + arr[i][1][0] + " is " + arr[i][1][1]);
+    }
+  }
+
+  console.log([1, 2, 3, 4].reduce(reducer, 50));
+  console.log(rotate(3, [1, 2, 3, 4]));
+  console.log(makeArray(10));
+  var myZoo = [["King Kong", ["gorilla", 42]], ["Nemo", ["fish", 5]], ["Punxsutawney Phil", ["groundhog", 11]]];
+  printArray(myZoo);
+};
+
+exports.default = _default;
+},{}],"anonymous.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -182,15 +238,18 @@ exports.default = _default;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+var _arrays = _interopRequireDefault(require("./arrays"));
+
 var _anonymous = _interopRequireDefault(require("./anonymous"));
 
 var _varDeclaration = _interopRequireDefault(require("./varDeclaration"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _arrays.default)();
 (0, _anonymous.default)();
 (0, _varDeclaration.default)();
-},{"./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -218,7 +277,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54992" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59975" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
