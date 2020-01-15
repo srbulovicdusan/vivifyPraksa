@@ -117,7 +117,53 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"arrays.js":[function(require,module,exports) {
+})({"objects.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = function _default() {
+  var person = {
+    firstname: "Dusan",
+    lastname: "Srbulovic",
+    age: 23
+  };
+  var personJSON = '{ "firstname" : "Dusan", "lastname" : "Srbulovic", "age" : 23}';
+  console.log(JSON.parse(personJSON));
+  console.log(JSON.stringify(person));
+  var arr = [1, 2, 3];
+  var arrJSON = '[1, 2, 3]';
+  var a = JSON.parse(arrJSON);
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = a[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var i = _step.value;
+      console.log(i);
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+};
+
+exports.default = _default;
+},{}],"arrays.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -238,6 +284,8 @@ exports.default = _default;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
+var _objects = _interopRequireDefault(require("./objects"));
+
 var _arrays = _interopRequireDefault(require("./arrays"));
 
 var _anonymous = _interopRequireDefault(require("./anonymous"));
@@ -246,10 +294,11 @@ var _varDeclaration = _interopRequireDefault(require("./varDeclaration"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _objects.default)();
 (0, _arrays.default)();
 (0, _anonymous.default)();
 (0, _varDeclaration.default)();
-},{"./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./objects":"objects.js","./arrays":"arrays.js","./anonymous":"anonymous.js","./varDeclaration":"varDeclaration.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
