@@ -18,7 +18,11 @@ export default () =>{
         for (let i = 0; i < num; i++){
             arr.push(i);
         }
-        return arr;
+        let start = arr.slice();
+        
+        let reversed = arr.reverse();
+        reversed.shift();
+        return [...start , ...reversed];
     }
     function printArray(arr) {
         
