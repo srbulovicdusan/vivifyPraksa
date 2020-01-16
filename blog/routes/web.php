@@ -24,7 +24,6 @@ Route::group(['middleware' => ['logging']], function () {
     Route::get('blade', 'HomeController@blade')->name('blade');
     Route::resource('photos', 'PhotoController');
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/error', 'ErrorController@error')->name('error');
 });
 
 Auth::routes();
