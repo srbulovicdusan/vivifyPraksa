@@ -1,4 +1,5 @@
-import Pregled from './pregled'
+import Pregled from './pregled';
+import logg from './logger';
 class PregledPritisak extends Pregled{
     constructor(datum, pacijent, doktor){
         super(datum, pacijent, doktor);
@@ -16,7 +17,13 @@ class PregledPritisak extends Pregled{
 
         this.setPuls = function(puls) {_puls = puls};
         this.getPuls = function() {return _puls};
-
+    }
+    izvrsi(){
+        this.setDVrednost(Math.random() * 100);
+        this.setGVrednost(Math.random() * 100);
+        this.setPuls(Math.random() * 100);
+        logg("Pacijent " + this.getPacijent().getIme() + " obavlja laboratorijski pregled za merenje krvnog pritiska. Donja vrednost:"
+        + this.getDVrednost() + " gornja vrednost: " + this.getGVrednost() + " puls: " + this.getPuls());
 
     }
 }

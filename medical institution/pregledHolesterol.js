@@ -1,4 +1,6 @@
-import Pregled from './pregled'
+import Pregled from './pregled';
+import logg from './logger';
+import format from './dateFormatter';
 class PregledHolesterol extends Pregled{
     constructor(datum, pacijent, doktor){
         super(datum, pacijent, doktor);
@@ -13,6 +15,12 @@ class PregledHolesterol extends Pregled{
 
         this.setVremePoslednjegObroka = function(vremePoslednjegObroka) {_vremePoslednjegObroka = vremePoslednjegObroka};
         this.getVremePoslednjegObroka = function() {return _vremePoslednjegObroka};
+    }
+    izvrsi(){
+        this.setVrednost(Math.random() * 100);
+        this.setVremePoslednjegObroka(new Date());
+        logg("Pacijent " + this.getPacijent().getIme() + " obavlja laboratorijski pregled za merenje holesterola. vrednost:"
+        + this.getVrednost() + " poslednji obrok: " + format(this.getVremePoslednjegObroka()));
     }
 }
 export default PregledHolesterol;

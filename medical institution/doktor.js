@@ -35,6 +35,11 @@ class Doktor{
 
         }
     }
+    addPacijent(pacijent){
+        let pacijenti = this.getPacijenti();
+        pacijenti.push(pacijent);
+        this.setPacijenti(pacijenti);
+    }
 }
 
 export default Doktor;

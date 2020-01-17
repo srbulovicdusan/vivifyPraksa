@@ -18,8 +18,9 @@ class Pregled{
 
         this.setDoktor = function (doktor) {_doktor = doktor};
         this.getDoktor = function () {return _doktor};
-
-
+    }
+    izvrsi(){
+        console.log("");
     }
 }
 export default Pregled;

@@ -127,47 +127,96 @@ exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Pregled = function Pregled(datumIVreme, pacijent, doktor) {
-  _classCallCheck(this, Pregled);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-  //abstract
-  if (this.contructor === Pregled) {
-    throw new Error("Ne sme se instancirati klasa Pregled");
-  } //private fields
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Pregled =
+/*#__PURE__*/
+function () {
+  function Pregled(datumIVreme, pacijent, doktor) {
+    _classCallCheck(this, Pregled);
+
+    //abstract
+    if (this.contructor === Pregled) {
+      throw new Error("Ne sme se instancirati klasa Pregled");
+    } //private fields
 
 
-  var _datumIVreme = datumIVreme;
-  var _pacijent = pacijent;
-  var _doktor = doktor;
+    var _datumIVreme = datumIVreme;
+    var _pacijent = pacijent;
+    var _doktor = doktor;
 
-  this.setDatumIVreme = function (datum) {
-    _datumIVreme = datum;
-  };
+    this.setDatumIVreme = function (datum) {
+      _datumIVreme = datum;
+    };
 
-  this.getDatumIVreme = function () {
-    return _datumIVreme;
-  };
+    this.getDatumIVreme = function () {
+      return _datumIVreme;
+    };
 
-  this.setPacijent = function (pacijent) {
-    _pacijent = pacijent;
-  };
+    this.setPacijent = function (pacijent) {
+      _pacijent = pacijent;
+    };
 
-  this.getPacijent = function () {
-    return _pacijent;
-  };
+    this.getPacijent = function () {
+      return _pacijent;
+    };
 
-  this.setDoktor = function (doktor) {
-    _doktor = doktor;
-  };
+    this.setDoktor = function (doktor) {
+      _doktor = doktor;
+    };
 
-  this.getDoktor = function () {
-    return _doktor;
-  };
-};
+    this.getDoktor = function () {
+      return _doktor;
+    };
+  }
+
+  _createClass(Pregled, [{
+    key: "izvrsi",
+    value: function izvrsi() {
+      console.log("");
+    }
+  }]);
+
+  return Pregled;
+}();
 
 var _default = Pregled;
 exports.default = _default;
-},{}],"pregledPritisak.js":[function(require,module,exports) {
+},{}],"dateFormatter.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function format(date) {
+  return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+}
+
+var _default = format;
+exports.default = _default;
+},{}],"logger.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _dateFormatter = _interopRequireDefault(require("./dateFormatter"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function logg(message) {
+  console.log("[ " + (0, _dateFormatter.default)(new Date()) + " ] " + message);
+}
+
+var _default = logg;
+exports.default = _default;
+},{"./dateFormatter":"dateFormatter.js"}],"pregledPritisak.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -177,11 +226,17 @@ exports.default = void 0;
 
 var _pregled = _interopRequireDefault(require("./pregled"));
 
+var _logger = _interopRequireDefault(require("./logger"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -236,12 +291,22 @@ function (_Pregled) {
     return _this;
   }
 
+  _createClass(PregledPritisak, [{
+    key: "izvrsi",
+    value: function izvrsi() {
+      this.setDVrednost(Math.random() * 100);
+      this.setGVrednost(Math.random() * 100);
+      this.setPuls(Math.random() * 100);
+      (0, _logger.default)("Pacijent " + this.getPacijent().getIme() + " obavlja laboratorijski pregled za merenje krvnog pritiska. Donja vrednost:" + this.getDVrednost() + " gornja vrednost: " + this.getGVrednost() + " puls: " + this.getPuls());
+    }
+  }]);
+
   return PregledPritisak;
 }(_pregled.default);
 
 var _default = PregledPritisak;
 exports.default = _default;
-},{"./pregled":"pregled.js"}],"PregledSecer.js":[function(require,module,exports) {
+},{"./pregled":"pregled.js","./logger":"logger.js"}],"PregledSecer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -251,11 +316,17 @@ exports.default = void 0;
 
 var _pregled = _interopRequireDefault(require("./pregled"));
 
+var _logger = _interopRequireDefault(require("./logger"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -301,12 +372,21 @@ function (_Pregled) {
     return _this;
   }
 
+  _createClass(PregledSecer, [{
+    key: "izvrsi",
+    value: function izvrsi() {
+      this.setVrednost(Math.random() * 100);
+      this.setVremePoslednjegObroka(new Date());
+      (0, _logger.default)("Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje nivoa secera u krvi. vrednost:" + pregled.getVrednost() + " poslednji obrok: " + format(pregled.getVremePoslednjegObroka()));
+    }
+  }]);
+
   return PregledSecer;
 }(_pregled.default);
 
 var _default = PregledSecer;
 exports.default = _default;
-},{"./pregled":"pregled.js"}],"pregledHolesterol.js":[function(require,module,exports) {
+},{"./pregled":"pregled.js","./logger":"logger.js"}],"pregledHolesterol.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -316,11 +396,19 @@ exports.default = void 0;
 
 var _pregled = _interopRequireDefault(require("./pregled"));
 
+var _logger = _interopRequireDefault(require("./logger"));
+
+var _dateFormatter = _interopRequireDefault(require("./dateFormatter"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -366,26 +454,21 @@ function (_Pregled) {
     return _this;
   }
 
+  _createClass(PregledHolesterol, [{
+    key: "izvrsi",
+    value: function izvrsi() {
+      this.setVrednost(Math.random() * 100);
+      this.setVremePoslednjegObroka(new Date());
+      (0, _logger.default)("Pacijent " + this.getPacijent().getIme() + " obavlja laboratorijski pregled za merenje holesterola. vrednost:" + this.getVrednost() + " poslednji obrok: " + (0, _dateFormatter.default)(this.getVremePoslednjegObroka()));
+    }
+  }]);
+
   return PregledHolesterol;
 }(_pregled.default);
 
 var _default = PregledHolesterol;
 exports.default = _default;
-},{"./pregled":"pregled.js"}],"dateFormatter.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function format(date) {
-  return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
-}
-
-var _default = format;
-exports.default = _default;
-},{}],"pacijent.js":[function(require,module,exports) {
+},{"./pregled":"pregled.js","./logger":"logger.js","./dateFormatter":"dateFormatter.js"}],"pacijent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -470,30 +553,12 @@ function () {
     value: function izaberiDoktora(doktor) {
       console.log("[ " + (0, _dateFormatter.default)(new Date()) + " ] Pacijent " + this.getIme() + " bira doktora " + doktor.getIme() + " za svog izabranog lekara.");
       this.setDoktor(doktor);
-      var pacijenti = doktor.getPacijenti();
-      pacijenti.push(this);
-      doktor.setPacijenti(pacijenti);
+      doktor.addPacijent(this);
     }
   }, {
     key: "izvrsiPregled",
     value: function izvrsiPregled(pregled) {
-      if (pregled instanceof _pregledPritisak.default) {
-        pregled.setDVrednost(Math.random() * 100);
-        pregled.setGVrednost(Math.random() * 100);
-        pregled.setPuls(Math.random() * 100);
-        console.log("[ " + (0, _dateFormatter.default)(new Date()) + " ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje krvnog pritiska. Donja vrednost:" + pregled.getDVrednost() + " gornja vrednost: " + pregled.getGVrednost() + " puls: " + pregled.getPuls());
-      } else if (pregled instanceof _PregledSecer.default) {
-        console.log(pregled);
-        pregled.setVrednost(Math.random() * 100);
-        pregled.setVremePoslednjegObroka(new Date());
-        console.log("[ " + (0, _dateFormatter.default)(new Date()) + " ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje nivoa secera u krvi. vrednost:" + pregled.getVrednost() + " poslednji obrok: " + (0, _dateFormatter.default)(pregled.getVremePoslednjegObroka()));
-      } else if (pregled instanceof _pregledHolesterol.default) {
-        pregled.setVrednost(Math.random() * 100);
-        pregled.setVremePoslednjegObroka(new Date());
-        console.log("[ " + (0, _dateFormatter.default)(new Date()) + " ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje holesterola. vrednost:" + pregled.getVrednost() + " poslednji obrok: " + (0, _dateFormatter.default)(pregled.getVremePoslednjegObroka()));
-      } else {
-        throw new Error("Nepostojeci pregled");
-      }
+      pregled.izvrsi();
     }
   }]);
 
@@ -590,6 +655,13 @@ function () {
           return new _pregledHolesterol.default(datum, pacijent, this);
       }
     }
+  }, {
+    key: "addPacijent",
+    value: function addPacijent(pacijent) {
+      var pacijenti = this.getPacijenti();
+      pacijenti.push(pacijent);
+      this.setPacijenti(pacijenti);
+    }
   }]);
 
   return Doktor;
@@ -607,6 +679,7 @@ var _doktor = _interopRequireDefault(require("./doktor"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var pacijent = new _pacijent.default("Dragan", "Milankovic", 1231241251, 1);
+console.log(pacijent);
 var doktor = new _doktor.default("Milan", "Draganovic", "specijalnost");
 pacijent.izaberiDoktora(doktor);
 var pregledSecer = doktor.zakaziPregled(pacijent, "PregledHolesterol");
@@ -641,7 +714,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56509" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49471" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

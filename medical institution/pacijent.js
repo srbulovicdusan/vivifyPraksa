@@ -28,33 +28,11 @@ class Pacijent {
     izaberiDoktora(doktor){
         console.log("[ " + format(new Date()) + " ] Pacijent " + this.getIme() + " bira doktora " + doktor.getIme() + " za svog izabranog lekara.");
         this.setDoktor(doktor);
-        let pacijenti = doktor.getPacijenti();
-        pacijenti.push(this);
-        doktor.setPacijenti(pacijenti);
+        doktor.addPacijent(this);
     }
     izvrsiPregled(pregled){
-        if (pregled instanceof PregledPritisak){
-            pregled.setDVrednost(Math.random() * 100);
-            pregled.setGVrednost(Math.random() * 100);
-            pregled.setPuls(Math.random() * 100);
-            console.log("[ "+ format(new Date()) +" ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje krvnog pritiska. Donja vrednost:"
-             + pregled.getDVrednost() + " gornja vrednost: " + pregled.getGVrednost() + " puls: " + pregled.getPuls());
-
-        }else if (pregled instanceof PregledSecer){
-            console.log(pregled);
-            pregled.setVrednost(Math.random() * 100);
-            pregled.setVremePoslednjegObroka(new Date());
-            console.log("[ "+ format(new Date()) +" ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje nivoa secera u krvi. vrednost:"
-            + pregled.getVrednost() + " poslednji obrok: " + format(pregled.getVremePoslednjegObroka()));
-
-        }else if (pregled instanceof PregledHolesterol){
-            pregled.setVrednost(Math.random() * 100);
-            pregled.setVremePoslednjegObroka(new Date());
-            console.log("[ "+ format(new Date()) +" ] Pacijent " + this.getIme() + " obavlja laboratorijski pregled za merenje holesterola. vrednost:"
-            + pregled.getVrednost() + " poslednji obrok: " + format(pregled.getVremePoslednjegObroka()));
-        }else{
-            throw new Error("Nepostojeci pregled");
-        }
+        pregled.izvrsi();
+        
     }
     
 
